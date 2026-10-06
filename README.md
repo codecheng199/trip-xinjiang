@@ -1,0 +1,2 @@
+# trip-xinjiang
+tripRecord
