@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>travel</title>
+    <meta name="description" content="旅行记录 - 2026/09/25 -乌鲁木齐">
+    <!-- Font Awesome 图标 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: linear-gradient(145deg, #0b1a2e 0%, #1a2f3f 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+            padding: 2rem 1.5rem;
+            color: #e0f0ff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* ========== 个人资料卡片 ========== */
+        .profile-card {
+            max-width: 1100px;
+            width: 100%;
+            background: rgba(18, 30, 41, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(100, 180, 255, 0.25);
+            border-radius: 2rem;
+            padding: 2rem 2.5rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6);
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .avatar {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            border: 3px solid #3a8eff;
+            box-shadow: 0 0 25px rgba(58, 142, 255, 0.5);
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .profile-info { flex: 1; min-width: 200px; }
+
+        .profile-info h1 {
+            font-size: 1.9rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 0.4rem;
+            background: linear-gradient(90deg, #8ac4ff, #fff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .profile-info .bio {
+            color: #9fc4e8;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            max-width: 560px;
+        }
+
+        .social-links { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+        .social-links a {
+            color: #b8d9ff;
+            font-size: 1.5rem;
+            transition: all 0.25s ease;
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            color: #fff;
+            transform: translateY(-3px) scale(1.1);
+            text-shadow: 0 0 15px #3a8eff;
+        }
+
+        /* ========== 航班可视化卡片（沿用原样式） ========== */
+        .card {
+            background: rgba(18, 30, 41, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(100, 180, 255, 0.25);
+            border-radius: 2rem;
+            padding: 1.8rem 2rem 1.5rem;
+            box-shadow: 0 30px 45px -15px rgba(0, 0, 0, 0.7);
+            max-width: 1100px;
+            width: 100%;
+        }
+
+        .card h2 {
+            text-align: center;
+            font-weight: 400;
+            font-size: 1.35rem;
+            letter-spacing: 3px;
+            color: #e0f0ff;
+            text-shadow: 0 0 12px #3a8eff;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+        }
+
+        .card h2 i { color: #8ac4ff; font-size: 1.3rem; filter: drop-shadow(0 0 8px #2f7eff); }
+
+        .map-container {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: #102433;
+            background-image:
+                    radial-gradient(circle at 25% 30%, rgba(40, 100, 180, 0.15) 0%, transparent 30%),
+                    radial-gradient(circle at 80% 70%, rgba(80, 160, 240, 0.1) 0%, transparent 40%),
+                    linear-gradient(125deg, #112b3c 0%, #183544 100%);
+            border-radius: 1.5rem;
+            border: 1px solid #275f85;
+            box-shadow: inset 0 0 50px #00000055;
+            overflow: hidden;
+        }
+
+        .map-grid {
+            position: absolute; inset: 0;
+            background-image:
+                    linear-gradient(rgba(80, 150, 220, 0.1) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(80, 150, 220, 0.1) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+        }
+
+        .city {
+            position: absolute;
+            display: flex; flex-direction: column; align-items: center;
+            transform: translate(-50%, -50%);
+            pointer-events: none; z-index: 10;
+        }
+
+        .city-dot {
+            width: 14px; height: 14px; background: #fff; border-radius: 50%;
+            border: 3px solid #ffd966;
+            box-shadow: 0 0 20px #ffb347, 0 0 6px #ffffff;
+            margin-bottom: 6px;
+        }
+
+        .city-name {
+            font-size: 0.85rem;
+            background: rgba(10, 25, 40, 0.8);
+            padding: 0.2rem 0.7rem;
+            border-radius: 20px;
+            border: 1px solid #5c9bd5;
+            letter-spacing: 1px;
+            white-space: nowrap;
+            box-shadow: 0 2px 8px #00000060;
+            color: #e0f0ff;
+        }
+
+        .city.urumqi .city-dot {
+            width: 18px; height: 18px; border-color: #ffaa33;
+            box-shadow: 0 0 28px #ffaa33, 0 0 12px #fff0b0;
+        }
+
+        .route-svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 5; }
+
+        .plane-wrapper {
+            position: absolute; z-index: 20;
+            width: 40px; height: 40px;
+            transform: translate(-50%, -50%);
+            filter: drop-shadow(0 0 10px #8ac4ff);
+            pointer-events: none;
+        }
+
+        .plane-icon {
+            font-size: 2.2rem; color: #f0f9ff;
+            text-shadow: 0 0 15px #3d8cff, 0 0 30px #0055cc;
+        }
+
+        .plane-shenzhen .plane-icon { color: #ffd9b3; }
+        .plane-shenyang .plane-icon { color: #b3e0ff; }
+
+        .info-panel {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-top: 1rem; padding: 0 0.5rem; flex-wrap: wrap; gap: 0.8rem;
+        }
+
+        .legend { display: flex; gap: 1.8rem; font-size: 0.85rem; color: #b8d9ff; }
+        .legend-item { display: flex; align-items: center; gap: 0.5rem; }
+        .legend-color { width: 16px; height: 4px; border-radius: 4px; }
+        .legend-color.shenzhen { background: #ffaa33; box-shadow: 0 0 12px #ffaa33; }
+        .legend-color.shenyang { background: #5aa9ff; box-shadow: 0 0 12px #5aa9ff; }
+
+        .status {
+            font-size: 0.85rem; background: #0b1f2b; padding: 0.4rem 1.2rem;
+            border-radius: 30px; border: 1px solid #2e6188; color: #aad0ff;
+            letter-spacing: 1px; white-space: nowrap;
+        }
+        .status i { color: #79c1ff; margin-right: 0.4rem; }
+
+        footer {
+            margin-top: 1.5rem;
+            font-size: 0.8rem;
+            color: #6f9cc0;
+            text-align: center;
+        }
+
+        @media (max-width: 700px) {
+            .profile-card { padding: 1.5rem; gap: 1.2rem; justify-content: center; text-align: center; }
+            .profile-info h1 { font-size: 1.5rem; }
+            .social-links { justify-content: center; }
+            .card { padding: 1.2rem; }
+            .city-name { font-size: 0.7rem; }
+            .plane-icon { font-size: 1.6rem; }
+            .plane-wrapper { width: 30px; height: 30px; }
+            .legend { gap: 0.8rem; font-size: 0.7rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ========== 个人资料区 ========== -->
+<section class="profile-card">
+    <!-- 头像: 换成你自己的 GitHub 头像链接, 或本地图片 -->
+    <img class="avatar" src="https://avatars.githubusercontent.com/u/1?v=4" alt="avatar">
+    <div class="profile-info">
+        <h1>你的名字 / YourName</h1>
+        <p class="bio">
+            你好！这里是你的个人主页。热爱编程、旅行与可视化 ✈️<br>
+            记录深圳与沈阳飞往乌鲁木齐的航班动态。
+        </p>
+        <div class="social-links">
+            <a href="https://github.com/你的用户名" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+            <a href="mailto:你的邮箱" title="Email"><i class="fas fa-envelope"></i></a>
+            <a href="https://twitter.com/你的用户名" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="你的博客链接" target="_blank" title="Blog"><i class="fas fa-blog"></i></a>
+        </div>
+    </div>
+</section>
+
+<!-- ========== 航班可视化 ========== -->
+<div class="card">
+    <h2><i class="fas fa-plane"></i> 深圳 · 沈阳 → 乌鲁木齐 <i class="fas fa-plane" style="transform: rotate(-15deg);"></i></h2>
+
+    <div class="map-container" id="mapContainer">
+        <div class="map-grid"></div>
+        <svg class="route-svg" id="routeSvg" viewBox="0 0 1000 562.5" preserveAspectRatio="none">
+            <path id="shenzhenPath" d="" stroke="#ffaa33" stroke-width="2.5" fill="none"
+                  stroke-dasharray="8 10" stroke-linecap="round" opacity="0.7" />
+            <path id="shenyangPath" d="" stroke="#5aa9ff" stroke-width="2.5" fill="none"
+                  stroke-dasharray="8 10" stroke-linecap="round" opacity="0.7" />
+        </svg>
+
+        <div class="city shenzhen" id="cityShenzhen" style="left: 0; top: 0;">
+            <div class="city-dot"></div>
+            <div class="city-name">深圳</div>
+        </div>
+        <div class="city shenyang" id="cityShenyang" style="left: 0; top: 0;">
+            <div class="city-dot"></div>
+            <div class="city-name">沈阳</div>
+        </div>
+        <div class="city urumqi" id="cityUrumqi" style="left: 0; top: 0;">
+            <div class="city-dot"></div>
+            <div class="city-name">乌鲁木齐</div>
+        </div>
+
+        <div class="plane-wrapper plane-shenzhen" id="planeShenzhen">
+            <i class="fas fa-plane plane-icon" id="iconShenzhen"></i>
+        </div>
+        <div class="plane-wrapper plane-shenyang" id="planeShenyang">
+            <i class="fas fa-plane plane-icon" id="iconShenyang"></i>
+        </div>
+    </div>
+
+    <div class="info-panel">
+        <div class="legend">
+            <div class="legend-item"><span class="legend-color shenzhen"></span> 深圳 → 乌鲁木齐</div>
+            <div class="legend-item"><span class="legend-color shenyang"></span> 沈阳 → 乌鲁木齐</div>
+        </div>
+        <div class="status" id="statusText">
+            <i class="fas fa-satellite-dish"></i> 航班实时追踪
+        </div>
+    </div>
+</div>
+
+<footer>
+    © <span id="year"></span> 你的名字 · Powered by GitHub Pages
+</footer>
+
+<script>
+    // ========== 航班动画逻辑（与原版一致）==========
+    (function() {
+        const CITY_POS = {
+            shenzhen: { x: 0.78, y: 0.80 },
+            shenyang: { x: 0.82, y: 0.28 },
+            urumqi:   { x: 0.18, y: 0.42 }
+        };
+
+        const mapContainer = document.getElementById('mapContainer');
+        const cityShenzhen = document.getElementById('cityShenzhen');
+        const cityShenyang = document.getElementById('cityShenyang');
+        const cityUrumqi = document.getElementById('cityUrumqi');
+        const planeShenzhen = document.getElementById('planeShenzhen');
+        const planeShenyang = document.getElementById('planeShenyang');
+        const iconShenzhen = document.getElementById('iconShenzhen');
+        const iconShenyang = document.getElementById('iconShenyang');
+        const shenzhenPath = document.getElementById('shenzhenPath');
+        const shenyangPath = document.getElementById('shenyangPath');
+        const statusText = document.getElementById('statusText');
+
+        let progressShenzhen = 0;
+        let progressShenyang = 0;
+        const SPEED_SHENZHEN = 0.0018;
+        const SPEED_SHENYANG = 0.0014;
+
+        function percentageToSvg(pos) {
+            return { x: pos.x * 1000, y: pos.y * 562.5 };
+        }
+
+        function getControlPoint(start, end, curvatureX = 0.3, curvatureY = 0.3) {
+            const midX = (start.x + end.x) / 2;
+            const midY = (start.y + end.y) / 2;
+            const dx = end.x - start.x;
+            const dy = end.y - start.y;
+            const len = Math.sqrt(dx*dx + dy*dy) || 1;
+            const perpX = -dy / len;
+            const perpY = dx / len;
+            const offset = len * 0.25;
+            return {
+                x: midX + perpX * offset * curvatureX,
+                y: midY + perpY * offset * curvatureY
+            };
+        }
+
+        function setCityPosition(element, pos) {
+            if (!element) return;
+            element.style.left = (pos.x * 100) + '%';
+            element.style.top = (pos.y * 100) + '%';
+        }
+
+        function updatePlanePosition(type, progress) {
+            const startPos = type === 'shenzhen' ? CITY_POS.shenzhen : CITY_POS.shenyang;
+            const endPos = CITY_POS.urumqi;
+            const startSvg = percentageToSvg(startPos);
+            const endSvg = percentageToSvg(endPos);
+            let ctrlSvg = type === 'shenzhen'
+                ? getControlPoint(startSvg, endSvg, 0.35, 0.45)
+                : getControlPoint(startSvg, endSvg, 0.4, -0.3);
+
+            const t = Math.min(progress, 1);
+            const mt = 1 - t;
+            const xSvg = mt*mt*startSvg.x + 2*mt*t*ctrlSvg.x + t*t*endSvg.x;
+            const ySvg = mt*mt*startSvg.y + 2*mt*t*ctrlSvg.y + t*t*endSvg.y;
+            const percentX = xSvg / 1000;
+            const percentY = ySvg / 562.5;
+
+            const dx = 2*mt*(ctrlSvg.x - startSvg.x) + 2*t*(endSvg.x - ctrlSvg.x);
+            const dy = 2*mt*(ctrlSvg.y - startSvg.y) + 2*t*(endSvg.y - ctrlSvg.y);
+            const angle = Math.atan2(dy, dx) * (180 / Math.PI);
+
+            const planeWrapper = type === 'shenzhen' ? planeShenzhen : planeShenyang;
+            const icon = type === 'shenzhen' ? iconShenzhen : iconShenyang;
+
+            if (planeWrapper) {
+                planeWrapper.style.left = (percentX * 100) + '%';
+                planeWrapper.style.top = (percentY * 100) + '%';
+            }
+            if (icon) {
+                icon.style.transform = `rotate(${angle + 45}deg)`;
+            }
+        }
+
+        function updatePositions() {
+            if (!mapContainer) return;
+            setCityPosition(cityShenzhen, CITY_POS.shenzhen);
+            setCityPosition(cityShenyang, CITY_POS.shenyang);
+            setCityPosition(cityUrumqi, CITY_POS.urumqi);
+
+            const startShenzhen = percentageToSvg(CITY_POS.shenzhen);
+            const startShenyang = percentageToSvg(CITY_POS.shenyang);
+            const endUrumqi = percentageToSvg(CITY_POS.urumqi);
+
+            const ctrlSZ = getControlPoint(startShenzhen, endUrumqi, 0.35, 0.45);
+            shenzhenPath.setAttribute('d',
+                `M ${startShenzhen.x} ${startShenzhen.y} Q ${ctrlSZ.x} ${ctrlSZ.y} ${endUrumqi.x} ${endUrumqi.y}`);
+
+            const ctrlSY = getControlPoint(startShenyang, endUrumqi, 0.4, -0.3);
+            shenyangPath.setAttribute('d',
+                `M ${startShenyang.x} ${startShenyang.y} Q ${ctrlSY.x} ${ctrlSY.y} ${endUrumqi.x} ${endUrumqi.y}`);
+
+            updatePlanePosition('shenzhen', progressShenzhen);
+            updatePlanePosition('shenyang', progressShenyang);
+        }
+
+        let lastTimestamp = 0;
+        function animate(timestamp) {
+            if (!lastTimestamp) lastTimestamp = timestamp;
+            const delta = Math.min(100, timestamp - lastTimestamp);
+            lastTimestamp = timestamp;
+
+            progressShenzhen += SPEED_SHENZHEN * (delta / 16.67);
+            progressShenyang += SPEED_SHENYANG * (delta / 16.67);
+            if (progressShenzhen > 1) progressShenzhen = 0;
+            if (progressShenyang > 1) progressShenyang = 0;
+
+            updatePositions();
+
+            if (statusText) {
+                const s1 = Math.round(progressShenzhen * 100);
+                const s2 = Math.round(progressShenyang * 100);
+                statusText.innerHTML = `<i class="fas fa-satellite-dish"></i> 深圳 ${s1}% · 沈阳 ${s2}%`;
+            }
+            requestAnimationFrame(animate);
+        }
+
+        function init() {
+            progressShenzhen = 0;
+            progressShenyang = 0;
+            updatePositions();
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('load', init);
+        window.addEventListener('resize', () => updatePositions());
+    })();
+
+    // 年份自动更新
+    document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
