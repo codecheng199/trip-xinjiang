@@ -197,7 +197,7 @@
         }
 
         /* 路线：实线 + 发光 */
-        #xjRoute {
+        .route-segment {
             fill: none;
             stroke: #4a9eff;
             stroke-width: 2.2;
@@ -465,8 +465,6 @@
           Q 135,235 140,150 Z
         " fill="rgba(20, 50, 80, 0.28)" stroke="#2e6188" stroke-width="2" stroke-linejoin="round" />
 
-                <!-- 路线：带箭头的多段线 -->
-                <path id="xjRoute" d="" marker-end="url(#arrowhead)" />
             </svg>
         </div>
     </section>
@@ -554,10 +552,15 @@
             });
         });
 
-        // 清理旧的标记（避免重复渲染）
+        // 清理旧标记
         Object.values(placeElements).forEach(el => el.remove());
         for (const k in placeElements) delete placeElements[k];
 
+        // 清理旧的路线段（避免重复渲染）
+        const svg = document.getElementById('xjSvg');
+        svg.querySelectorAll('.route-segment').forEach(el => el.remove());
+
+        // 渲染地点标记
         allPlaces.forEach(name => {
             const pos = PLACE_POS[name];
             if (!pos) return;
@@ -572,7 +575,7 @@
             placeElements[name] = el;
         });
 
-        // 绘制带箭头的路线：按行程顺序拼成一条 path
+        // 收集按顺序的坐标点
         const points = [];
         ITINERARY.forEach(d => {
             [...d.from, ...d.to].forEach(p => {
@@ -581,12 +584,18 @@
             });
         });
 
-        if (points.length > 1) {
-            let d = `M ${points[0][0]} ${points[0][1]}`;
-            for (let i = 1; i < points.length; i++) {
-                d += ` L ${points[i][0]} ${points[i][1]}`;
-            }
-            xjRoute.setAttribute('d', d);
+        // 逐段绘制，每段都带箭头
+        for (let i = 0; i < points.length - 1; i++) {
+            const [x1, y1] = points[i];
+            const [x2, y2] = points[i + 1];
+            // 跳过重复点（避免零长度线段）
+            if (x1 === x2 && y1 === y2) continue;
+
+            const seg = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            seg.setAttribute('class', 'route-segment');
+            seg.setAttribute('d', `M ${x1} ${y1} L ${x2} ${y2}`);
+            seg.setAttribute('marker-end', 'url(#arrowhead)');
+            svg.appendChild(seg);
         }
     }
 
