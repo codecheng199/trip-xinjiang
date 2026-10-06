@@ -21,224 +21,305 @@
 
         .page { max-width: 1150px; width: 100%; }
 
-        /* ===== 顶部标题 ===== */
-        .hero {
-            text-align: center;
-            margin-bottom: 2.5rem;
-        }
-
+        /* ===== Hero ===== */
+        .hero { text-align: center; margin-bottom: 2.5rem; }
         .hero h1 {
-            font-size: 2.4rem;
-            font-weight: 300;
-            letter-spacing: 6px;
+            font-size: 2.4rem; font-weight: 300; letter-spacing: 6px;
             background: linear-gradient(90deg, #8ac4ff, #fff, #8ac4ff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 0.6rem;
+            -webkit-background-clip: text; background-clip: text;
+            -webkit-text-fill-color: transparent; margin-bottom: 0.6rem;
         }
-
-        .hero p {
-            color: #9fc4e8;
-            font-size: 1rem;
-            letter-spacing: 2px;
-        }
-
+        .hero p { color: #9fc4e8; font-size: 1rem; letter-spacing: 2px; }
         .hero .date-range {
-            display: inline-block;
-            margin-top: 0.8rem;
-            padding: 0.35rem 1.2rem;
-            border: 1px solid #2e6188;
-            border-radius: 30px;
-            font-size: 0.85rem;
-            color: #aad0ff;
-            background: #0b1f2b;
+            display: inline-block; margin-top: 0.8rem;
+            padding: 0.35rem 1.2rem; border: 1px solid #2e6188;
+            border-radius: 30px; font-size: 0.85rem; color: #aad0ff; background: #0b1f2b;
         }
 
         /* ===== 通用卡片 ===== */
         .panel {
             background: rgba(18, 30, 41, 0.8);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(100, 180, 255, 0.25);
-            border-radius: 1.8rem;
-            padding: 1.8rem 2rem;
+            border-radius: 1.8rem; padding: 1.8rem 2rem;
             box-shadow: 0 30px 45px -15px rgba(0, 0, 0, 0.7);
             margin-bottom: 2rem;
         }
-
         .panel h2 {
-            font-weight: 400;
-            font-size: 1.25rem;
-            letter-spacing: 3px;
-            color: #e0f0ff;
-            text-shadow: 0 0 12px #3a8eff;
-            margin-bottom: 1.4rem;
-            display: flex;
-            align-items: center;
-            gap: 0.7rem;
+            font-weight: 400; font-size: 1.25rem; letter-spacing: 3px;
+            color: #e0f0ff; text-shadow: 0 0 12px #3a8eff;
+            margin-bottom: 1.4rem; display: flex; align-items: center; gap: 0.7rem;
         }
-
         .panel h2 i { color: #8ac4ff; font-size: 1.15rem; }
 
         /* ===== 航班地图 ===== */
         .map-container {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 16 / 9;
+            position: relative; width: 100%; aspect-ratio: 16 / 9;
             background: #102433;
             background-image:
                     radial-gradient(circle at 25% 30%, rgba(40, 100, 180, 0.15) 0%, transparent 30%),
                     radial-gradient(circle at 80% 70%, rgba(80, 160, 240, 0.1) 0%, transparent 40%),
                     linear-gradient(125deg, #112b3c 0%, #183544 100%);
-            border-radius: 1.4rem;
-            border: 1px solid #275f85;
-            box-shadow: inset 0 0 50px #00000055;
-            overflow: hidden;
+            border-radius: 1.4rem; border: 1px solid #275f85;
+            box-shadow: inset 0 0 50px #00000055; overflow: hidden;
         }
-
         .map-grid {
             position: absolute; inset: 0;
             background-image:
                     linear-gradient(rgba(80, 150, 220, 0.1) 1px, transparent 1px),
                     linear-gradient(90deg, rgba(80, 150, 220, 0.1) 1px, transparent 1px);
-            background-size: 40px 40px;
-            pointer-events: none;
+            background-size: 40px 40px; pointer-events: none;
         }
-
         .city {
-            position: absolute;
-            display: flex; flex-direction: column; align-items: center;
-            transform: translate(-50%, -50%);
-            pointer-events: none; z-index: 10;
+            position: absolute; display: flex; flex-direction: column; align-items: center;
+            transform: translate(-50%, -50%); pointer-events: none; z-index: 10;
         }
-
         .city-dot {
             width: 12px; height: 12px; background: #fff; border-radius: 50%;
             border: 3px solid #ffd966;
-            box-shadow: 0 0 18px #ffb347, 0 0 6px #ffffff;
-            margin-bottom: 5px;
+            box-shadow: 0 0 18px #ffb347, 0 0 6px #ffffff; margin-bottom: 5px;
         }
-
         .city-name {
-            font-size: 0.78rem;
-            background: rgba(10, 25, 40, 0.85);
-            padding: 0.15rem 0.6rem;
-            border-radius: 20px;
-            border: 1px solid #5c9bd5;
-            white-space: nowrap;
-            box-shadow: 0 2px 8px #00000060;
-            color: #e0f0ff;
+            font-size: 0.78rem; background: rgba(10, 25, 40, 0.85);
+            padding: 0.15rem 0.6rem; border-radius: 20px;
+            border: 1px solid #5c9bd5; white-space: nowrap;
+            box-shadow: 0 2px 8px #00000060; color: #e0f0ff;
         }
-
         .city.urumqi .city-dot {
             width: 16px; height: 16px; border-color: #ffaa33;
             box-shadow: 0 0 28px #ffaa33, 0 0 12px #fff0b0;
         }
-
         .route-svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 5; }
-
         .plane-wrapper {
-            position: absolute; z-index: 20;
-            width: 40px; height: 40px;
+            position: absolute; z-index: 20; width: 40px; height: 40px;
             transform: translate(-50%, -50%);
-            filter: drop-shadow(0 0 10px #8ac4ff);
-            pointer-events: none;
+            filter: drop-shadow(0 0 10px #8ac4ff); pointer-events: none;
         }
-
         .plane-icon {
             font-size: 2rem; color: #f0f9ff;
             text-shadow: 0 0 15px #3d8cff, 0 0 30px #0055cc;
         }
-
         .plane-shenzhen .plane-icon { color: #ffd9b3; }
         .plane-shenyang .plane-icon { color: #b3e0ff; }
-
         .info-panel {
             display: flex; justify-content: space-between; align-items: center;
             margin-top: 1rem; flex-wrap: wrap; gap: 0.8rem;
         }
-
         .legend { display: flex; gap: 1.6rem; font-size: 0.82rem; color: #b8d9ff; flex-wrap: wrap; }
         .legend-item { display: flex; align-items: center; gap: 0.5rem; }
         .legend-color { width: 16px; height: 4px; border-radius: 4px; }
         .legend-color.shenzhen { background: #ffaa33; box-shadow: 0 0 12px #ffaa33; }
         .legend-color.shenyang { background: #5aa9ff; box-shadow: 0 0 12px #5aa9ff; }
-
         .status {
             font-size: 0.82rem; background: #0b1f2b; padding: 0.4rem 1.1rem;
-            border-radius: 30px; border: 1px solid #2e6188; color: #aad0ff;
-            white-space: nowrap;
+            border-radius: 30px; border: 1px solid #2e6188; color: #aad0ff; white-space: nowrap;
         }
         .status i { color: #79c1ff; margin-right: 0.4rem; }
 
-        /* ===== 行程时间轴 ===== */
-        .timeline { position: relative; padding-left: 2rem; }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 7px; top: 0; bottom: 0;
-            width: 2px;
-            background: linear-gradient(180deg, #3a8eff, #1e4b8a, transparent);
-        }
-
-        .tl-item {
+        /* ===== 新疆环线地图 ===== */
+        .xinjiang-map {
             position: relative;
-            padding: 0 0 1.5rem 1.4rem;
-            cursor: pointer;
-            transition: transform 0.2s ease;
+            width: 100%;
+            background: #0d1e2b;
+            background-image:
+                    radial-gradient(circle at 40% 40%, rgba(40, 100, 180, 0.1) 0%, transparent 60%),
+                    linear-gradient(135deg, #0d1e2b 0%, #142b3b 100%);
+            border-radius: 1.4rem;
+            border: 1px solid #275f85;
+            box-shadow: inset 0 0 50px #00000055;
+            overflow: hidden;
+            aspect-ratio: 4 / 3;
         }
+        #xjSvg { width: 100%; height: 100%; display: block; }
 
-        .tl-item:hover { transform: translateX(4px); }
-
-        .tl-item::before {
-            content: '';
+        .xj-place {
             position: absolute;
-            left: -1.55rem; top: 0.35rem;
-            width: 12px; height: 12px;
-            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            cursor: pointer;
+            pointer-events: auto;
+            transition: all 0.25s ease;
+        }
+        .xj-place .xj-dot {
+            width: 10px; height: 10px; border-radius: 50%;
             background: #1a2f3f;
             border: 2px solid #4a90d9;
-            box-shadow: 0 0 10px #3a8eff;
-            transition: all 0.2s ease;
-            z-index: 2;
+            box-shadow: 0 0 8px #3a8eff;
+            transition: all 0.25s ease;
+            margin: 0 auto;
         }
-
-        .tl-item.active::before {
+        .xj-place .xj-label {
+            font-size: 0.72rem;
+            color: #8fb4d4;
+            background: rgba(10, 25, 40, 0.8);
+            padding: 0.1rem 0.5rem;
+            border-radius: 12px;
+            border: 1px solid #1e4b6e;
+            white-space: nowrap;
+            margin-top: 4px;
+            text-align: center;
+            transition: all 0.25s ease;
+        }
+        .xj-place.active .xj-dot {
+            width: 15px; height: 15px;
             background: #ffd966;
             border-color: #ffaa33;
-            box-shadow: 0 0 18px #ffaa33, 0 0 8px #fff0b0;
-            transform: scale(1.25);
+            box-shadow: 0 0 20px #ffaa33, 0 0 10px #fff0b0;
+        }
+        .xj-place.active .xj-label {
+            color: #ffd966;
+            border-color: #ffaa33;
+            text-shadow: 0 0 10px rgba(255, 180, 50, 0.5);
+        }
+        .xj-place:hover .xj-dot {
+            transform: scale(1.3);
+            box-shadow: 0 0 18px #3a8eff;
         }
 
-        .tl-date {
-            font-size: 0.78rem;
-            color: #79c1ff;
-            letter-spacing: 1.5px;
-            margin-bottom: 0.25rem;
+        #xjRoute {
+            fill: none;
+            stroke: #3a8eff;
+            stroke-width: 1.5;
+            stroke-dasharray: 6 6;
+            opacity: 0.6;
+            filter: drop-shadow(0 0 4px #3a8eff);
         }
 
-        .tl-route {
-            font-size: 1rem;
-            color: #e0f0ff;
-            font-weight: 500;
+        /* ===== 每日照片墙 + 日记 ===== */
+        .day-block {
+            margin-bottom: 1.2rem;
+            border: 1px solid #1e4b6e;
+            border-radius: 1.2rem;
+            overflow: hidden;
+            background: rgba(10, 25, 40, 0.5);
+            transition: border-color 0.25s ease;
+        }
+        .day-block:hover { border-color: #2e6188; }
+        .day-block.active { border-color: #ffaa33; box-shadow: 0 0 20px rgba(255, 170, 50, 0.15); }
+
+        .day-header {
             display: flex;
             align-items: center;
-            flex-wrap: wrap;
+            gap: 1rem;
+            padding: 0.9rem 1.2rem;
+            cursor: pointer;
+            user-select: none;
+            background: rgba(18, 30, 41, 0.6);
+            transition: background 0.25s ease;
+        }
+        .day-header:hover { background: rgba(30, 50, 70, 0.7); }
+
+        .day-header .day-date {
+            font-size: 0.9rem;
+            color: #79c1ff;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            min-width: 52px;
+        }
+        .day-header .day-route {
+            flex: 1;
+            font-size: 0.95rem;
+            color: #e0f0ff;
+        }
+        .day-header .day-route .arrow { color: #4a90d9; font-size: 0.8rem; margin: 0 0.2rem; }
+        .day-header .day-toggle {
+            color: #6f9cc0;
+            font-size: 0.85rem;
+            transition: transform 0.3s ease;
+        }
+        .day-block.open .day-toggle { transform: rotate(180deg); }
+
+        .day-body {
+            display: none;
+            padding: 1.2rem;
+            border-top: 1px solid #1e4b6e;
+        }
+        .day-block.open .day-body { display: block; }
+
+        .photo-carousel {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: #0a1620;
+            border-radius: 0.8rem;
+            overflow: hidden;
+            margin-bottom: 1rem;
+            border: 1px solid #1e4b6e;
+        }
+        .photo-carousel img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: opacity 0.4s ease;
+        }
+        .photo-carousel .no-photo {
+            width: 100%; height: 100%;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            color: #4a7a9e;
+            font-size: 0.85rem;
+            gap: 0.5rem;
+        }
+        .photo-carousel .no-photo i { font-size: 2rem; }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(10, 25, 40, 0.7);
+            border: 1px solid #2e6188;
+            color: #b8d9ff;
+            width: 36px; height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.9rem;
+            transition: all 0.25s ease;
+            z-index: 5;
+        }
+        .carousel-btn:hover { background: #1e4b6e; color: #fff; }
+        .carousel-btn.prev { left: 10px; }
+        .carousel-btn.next { right: 10px; }
+
+        .carousel-indicator {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 5px;
+            z-index: 5;
+        }
+        .carousel-indicator span {
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            transition: background 0.25s ease;
+        }
+        .carousel-indicator span.active { background: #ffd966; box-shadow: 0 0 8px #ffaa33; }
+
+        .journal {
+            background: rgba(10, 25, 40, 0.6);
+            border: 1px solid #1e4b6e;
+            border-radius: 0.8rem;
+            padding: 1rem 1.2rem;
+            font-size: 0.9rem;
+            line-height: 1.8;
+            color: #c8dff0;
+            min-height: 60px;
+        }
+        .journal .journal-label {
+            font-size: 0.75rem;
+            color: #6f9cc0;
+            letter-spacing: 1.5px;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
             gap: 0.4rem;
         }
-
-        .tl-route .arrow { color: #4a90d9; font-size: 0.85rem; }
-
-        .tl-note {
-            font-size: 0.8rem;
-            color: #8fb4d4;
-            margin-top: 0.25rem;
-            letter-spacing: 0.5px;
-        }
-
-        .tl-item.active .tl-route { color: #ffd966; text-shadow: 0 0 12px rgba(255, 180, 50, 0.5); }
+        .journal .journal-label i { color: #8ac4ff; }
+        .journal .journal-text { white-space: pre-wrap; }
 
         /* ===== 数据统计 ===== */
         .stats-grid {
@@ -246,7 +327,6 @@
             grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
             gap: 1rem;
         }
-
         .stat {
             background: rgba(10, 25, 40, 0.6);
             border: 1px solid #1e4b6e;
@@ -254,27 +334,18 @@
             padding: 1.1rem 1rem;
             text-align: center;
         }
-
         .stat .num {
-            font-size: 1.6rem;
-            font-weight: 600;
-            color: #8ac4ff;
-            text-shadow: 0 0 15px #3a8eff;
+            font-size: 1.6rem; font-weight: 600;
+            color: #8ac4ff; text-shadow: 0 0 15px #3a8eff;
         }
-
         .stat .label {
-            font-size: 0.75rem;
-            color: #8fb4d4;
-            letter-spacing: 1px;
-            margin-top: 0.3rem;
+            font-size: 0.75rem; color: #8fb4d4;
+            letter-spacing: 1px; margin-top: 0.3rem;
         }
 
         footer {
-            margin-top: 1rem;
-            font-size: 0.78rem;
-            color: #6f9cc0;
-            text-align: center;
-            letter-spacing: 1px;
+            margin-top: 1rem; font-size: 0.78rem;
+            color: #6f9cc0; text-align: center; letter-spacing: 1px;
         }
 
         @media (max-width: 700px) {
@@ -284,24 +355,22 @@
             .plane-icon { font-size: 1.5rem; }
             .plane-wrapper { width: 28px; height: 28px; }
             .legend { gap: 0.7rem; font-size: 0.7rem; }
-            .tl-route { font-size: 0.9rem; }
+            .day-header .day-route { font-size: 0.85rem; }
+            .day-header .day-date { font-size: 0.8rem; min-width: 44px; }
         }
     </style>
 </head>
 <body>
 <div class="page">
 
-    <!-- ===== Hero ===== -->
     <header class="hero">
         <h1>新疆行记</h1>
         <p>深圳 · 沈阳 → 乌鲁木齐 · 北疆环线</p>
         <div class="date-range"><i class="far fa-calendar-alt"></i> 2025.09.25 — 10.06</div>
     </header>
 
-    <!-- ===== 航班可视化 ===== -->
     <section class="panel">
         <h2><i class="fas fa-plane-departure"></i> 启程 · 双城飞往乌鲁木齐</h2>
-
         <div class="map-container" id="mapContainer">
             <div class="map-grid"></div>
             <svg class="route-svg" id="routeSvg" viewBox="0 0 1000 562.5" preserveAspectRatio="none">
@@ -310,7 +379,6 @@
                 <path id="shenyangPath" d="" stroke="#5aa9ff" stroke-width="2.5" fill="none"
                       stroke-dasharray="8 10" stroke-linecap="round" opacity="0.75" />
             </svg>
-
             <div class="city shenzhen" id="cityShenzhen" style="left:0;top:0;">
                 <div class="city-dot"></div><div class="city-name">深圳</div>
             </div>
@@ -320,7 +388,6 @@
             <div class="city urumqi" id="cityUrumqi" style="left:0;top:0;">
                 <div class="city-dot"></div><div class="city-name">乌鲁木齐</div>
             </div>
-
             <div class="plane-wrapper plane-shenzhen" id="planeShenzhen">
                 <i class="fas fa-plane plane-icon" id="iconShenzhen"></i>
             </div>
@@ -328,7 +395,6 @@
                 <i class="fas fa-plane plane-icon" id="iconShenyang"></i>
             </div>
         </div>
-
         <div class="info-panel">
             <div class="legend">
                 <div class="legend-item"><span class="legend-color shenzhen"></span> 深圳 → 乌鲁木齐</div>
@@ -338,13 +404,38 @@
         </div>
     </section>
 
-    <!-- ===== 行程时间轴 ===== -->
     <section class="panel">
-        <h2><i class="fas fa-route"></i> 十二日行程 · 北疆环线</h2>
-        <div class="timeline" id="timeline"></div>
+        <h2><i class="fas fa-map-marked-alt"></i> 新疆环线地图</h2>
+        <div class="xinjiang-map" id="xinjiangMap">
+            <svg id="xjSvg" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid meet">
+                <path id="xjOutline" d="
+          M 120,180
+          Q 90,150 100,110
+          Q 130,70 200,60
+          Q 280,40 360,55
+          Q 440,65 500,50
+          Q 570,35 620,70
+          Q 680,110 700,170
+          Q 710,230 690,290
+          Q 670,340 630,380
+          Q 600,410 560,430
+          Q 520,460 470,480
+          Q 420,500 360,510
+          Q 300,520 250,500
+          Q 200,480 170,440
+          Q 140,390 130,330
+          Q 115,270 120,180 Z
+        " fill="rgba(20, 50, 80, 0.35)" stroke="#2e6188" stroke-width="2" stroke-linejoin="round" />
+                <polyline id="xjRoute" points="" />
+            </svg>
+        </div>
     </section>
 
-    <!-- ===== 数据统计 ===== -->
+    <section class="panel">
+        <h2><i class="fas fa-images"></i> 每日照片 · 日记</h2>
+        <div id="daysContainer"></div>
+    </section>
+
     <section class="panel">
         <h2><i class="fas fa-chart-line"></i> 行程概览</h2>
         <div class="stats-grid">
@@ -362,73 +453,206 @@
 
 <script>
     /* ============================================================
-       行程数据（以后改这里就行）
+       行程数据（改这里就能更新内容）
+       photos: 照片路径，放在 images/日期/ 文件夹
+       journal: 日记，用 \n 换行
        ============================================================ */
     const ITINERARY = [
-        { date: '09.25', from: ['深圳', '沈阳'], to: ['乌鲁木齐'], note: '双城起飞，抵达乌鲁木齐' },
-        { date: '09.26', from: ['乌鲁木齐'], to: ['布尔津'], note: '' },
-        { date: '09.27', from: ['布尔津'], to: ['白哈巴'], note: '' },
-        { date: '09.28', from: ['白哈巴'], to: [], note: '白哈巴停留一日' },
-        { date: '09.29', from: ['白哈巴'], to: ['喀纳斯'], note: '' },
-        { date: '09.30', from: ['喀纳斯'], to: ['贾登峪', '禾木'], note: '' },
-        { date: '10.01', from: ['禾木'], to: ['阿勒泰'], note: '' },
-        { date: '10.02', from: ['阿勒泰'], to: ['克拉玛依'], note: '' },
-        { date: '10.03', from: ['克拉玛依'], to: ['赛里木湖', '温泉县'], note: '' },
-        { date: '10.04', from: ['温泉县'], to: ['赛里木湖', '奎屯'], note: '' },
-        { date: '10.05', from: ['奎屯'], to: ['乌鲁木齐'], note: '' },
-        { date: '10.06', from: ['乌鲁木齐'], to: ['深圳', '沈阳'], note: '返程，行程结束' }
+        { date: '09.25', folder: '0925', from: ['深圳', '沈阳'], to: ['乌鲁木齐'],
+            note: '双城起飞，抵达乌鲁木齐',
+            photos: [],
+            journal: '今天从深圳和沈阳分别出发，飞往乌鲁木齐。\n\n抵达时已是傍晚，天边的晚霞把整个机场染成金色。新疆，我们来了！' },
+        { date: '09.26', folder: '0926', from: ['乌鲁木齐'], to: ['布尔津'], note: '', photos: [],
+            journal: '从乌鲁木齐出发前往布尔津，一路上戈壁与雪山交替。' },
+        { date: '09.27', folder: '0927', from: ['布尔津'], to: ['白哈巴'], note: '', photos: [],
+            journal: '抵达白哈巴，中国西北第一村。' },
+        { date: '09.28', folder: '0928', from: ['白哈巴'], to: [], note: '白哈巴停留一日', photos: [],
+            journal: '在白哈巴慢下来的一天。' },
+        { date: '09.29', folder: '0929', from: ['白哈巴'], to: ['喀纳斯'], note: '', photos: [],
+            journal: '前往喀纳斯。' },
+        { date: '09.30', folder: '0930', from: ['喀纳斯'], to: ['贾登峪', '禾木'], note: '', photos: [],
+            journal: '喀纳斯到禾木，途经贾登峪。' },
+        { date: '10.01', folder: '1001', from: ['禾木'], to: ['阿勒泰'], note: '', photos: [],
+            journal: '从禾木前往阿勒泰。' },
+        { date: '10.02', folder: '1002', from: ['阿勒泰'], to: ['克拉玛依'], note: '', photos: [],
+            journal: '阿勒泰到克拉玛依，途经魔鬼城。' },
+        { date: '10.03', folder: '1003', from: ['克拉玛依'], to: ['赛里木湖', '温泉县'], note: '', photos: [],
+            journal: '克拉玛依出发，经赛里木湖到温泉县。' },
+        { date: '10.04', folder: '1004', from: ['温泉县'], to: ['赛里木湖', '奎屯'], note: '', photos: [],
+            journal: '再次经过赛里木湖，前往奎屯。' },
+        { date: '10.05', folder: '1005', from: ['奎屯'], to: ['乌鲁木齐'], note: '', photos: [],
+            journal: '回到乌鲁木齐。' },
+        { date: '10.06', folder: '1006', from: ['乌鲁木齐'], to: ['深圳', '沈阳'], note: '返程，行程结束', photos: [],
+            journal: '返程日。十二天的新疆之旅结束，满载而归。' }
     ];
 
+    /* 地点在新疆地图上的相对坐标 (0~1) */
+    const PLACE_POS = {
+        '乌鲁木齐': { x: 0.42, y: 0.58 },
+        '布尔津':   { x: 0.48, y: 0.18 },
+        '白哈巴':   { x: 0.42, y: 0.10 },
+        '喀纳斯':   { x: 0.45, y: 0.13 },
+        '贾登峪':   { x: 0.47, y: 0.16 },
+        '禾木':     { x: 0.50, y: 0.14 },
+        '阿勒泰':   { x: 0.55, y: 0.20 },
+        '克拉玛依': { x: 0.48, y: 0.32 },
+        '赛里木湖': { x: 0.30, y: 0.42 },
+        '温泉县':   { x: 0.28, y: 0.38 },
+        '奎屯':     { x: 0.40, y: 0.40 }
+    };
+
     /* ============================================================
-       渲染时间轴 + 交互
+       新疆地图渲染
        ============================================================ */
-    const timelineEl = document.getElementById('timeline');
-    let activeIndex = -1;
+    const xinjiangMap = document.getElementById('xinjiangMap');
+    const xjRoute = document.getElementById('xjRoute');
+    const placeElements = {};
 
-    function renderTimeline() {
+    function renderXinjiangPlaces() {
+        const allPlaces = [];
+        ITINERARY.forEach(d => {
+            [...d.from, ...d.to].forEach(p => {
+                if (!allPlaces.includes(p)) allPlaces.push(p);
+            });
+        });
+
+        allPlaces.forEach(name => {
+            const pos = PLACE_POS[name];
+            if (!pos) return;
+            const el = document.createElement('div');
+            el.className = 'xj-place';
+            el.dataset.name = name;
+            el.style.left = (pos.x * 100) + '%';
+            el.style.top = (pos.y * 100) + '%';
+            el.innerHTML = `<div class="xj-dot"></div><div class="xj-label">${name}</div>`;
+            el.addEventListener('click', () => highlightPlace(name));
+            xinjiangMap.appendChild(el);
+            placeElements[name] = el;
+        });
+
+        const routePoints = [];
+        ITINERARY.forEach(d => {
+            [...d.from, ...d.to].forEach(p => {
+                const pos = PLACE_POS[p];
+                if (pos) routePoints.push(`${pos.x * 800},${pos.y * 600}`);
+            });
+        });
+        xjRoute.setAttribute('points', routePoints.join(' '));
+    }
+
+    function highlightPlace(name) {
+        Object.values(placeElements).forEach(el => el.classList.remove('active'));
+        if (placeElements[name]) placeElements[name].classList.add('active');
+    }
+
+    function highlightDayPlaces(index) {
+        Object.values(placeElements).forEach(el => el.classList.remove('active'));
+        const day = ITINERARY[index];
+        if (!day) return;
+        [...day.from, ...day.to].forEach(p => {
+            if (placeElements[p]) placeElements[p].classList.add('active');
+        });
+    }
+
+    /* ============================================================
+       每日照片 + 日记
+       ============================================================ */
+    const daysContainer = document.getElementById('daysContainer');
+
+    function renderDays() {
         ITINERARY.forEach((day, i) => {
-            const item = document.createElement('div');
-            item.className = 'tl-item';
-            item.dataset.index = i;
+            const block = document.createElement('div');
+            block.className = 'day-block';
+            block.dataset.index = i;
 
-            const routeParts = [];
-            day.from.forEach(c => routeParts.push(c));
-            day.to.forEach(c => routeParts.push(c));
-            // 用箭头连接
-            const routeHtml = routeParts
+            const stops = [...day.from, ...day.to];
+            const routeHtml = stops
                 .map((c, idx) => idx === 0 ? c : `<span class="arrow">→</span>${c}`)
                 .join('');
 
-            item.innerHTML = `
-      <div class="tl-date">${day.date}</div>
-      <div class="tl-route">${routeHtml}</div>
-      ${day.note ? `<div class="tl-note">${day.note}</div>` : ''}
+            const hasPhotos = day.photos && day.photos.length > 0;
+            const photosHtml = hasPhotos ? `
+      <div class="photo-carousel">
+        <img src="${day.photos[0]}" alt="${day.date}" id="img-${i}">
+        ${day.photos.length > 1 ? `
+          <button class="carousel-btn prev" data-day="${i}" data-dir="-1"><i class="fas fa-chevron-left"></i></button>
+          <button class="carousel-btn next" data-day="${i}" data-dir="1"><i class="fas fa-chevron-right"></i></button>
+          <div class="carousel-indicator" id="ind-${i}">
+            ${day.photos.map((_, pi) => `<span data-pi="${pi}" class="${pi === 0 ? 'active' : ''}"></span>`).join('')}
+          </div>
+        ` : ''}
+      </div>
+    ` : `
+      <div class="photo-carousel">
+        <div class="no-photo">
+          <i class="fas fa-image"></i>
+          <span>暂无照片，放入 images/${day.folder}/ 即可显示</span>
+        </div>
+      </div>
     `;
 
-            item.addEventListener('click', () => setActive(i));
-            timelineEl.appendChild(item);
+            block.innerHTML = `
+      <div class="day-header">
+        <div class="day-date">${day.date}</div>
+        <div class="day-route">${routeHtml}</div>
+        <div class="day-toggle"><i class="fas fa-chevron-down"></i></div>
+      </div>
+      <div class="day-body">
+        ${photosHtml}
+        <div class="journal">
+          <div class="journal-label"><i class="fas fa-pen"></i> 日记</div>
+          <div class="journal-text">${day.journal || '（还没有写日记）'}</div>
+        </div>
+      </div>
+    `;
+
+            block.querySelector('.day-header').addEventListener('click', () => {
+                const isOpen = block.classList.contains('open');
+                document.querySelectorAll('.day-block').forEach(b => b.classList.remove('open'));
+                if (!isOpen) {
+                    block.classList.add('open');
+                    highlightDayPlaces(i);
+                }
+            });
+
+            daysContainer.appendChild(block);
+        });
+
+        daysContainer.querySelectorAll('.carousel-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const dayIdx = parseInt(btn.dataset.day);
+                const dir = parseInt(btn.dataset.dir);
+                switchPhoto(dayIdx, dir);
+            });
         });
     }
 
-    function setActive(index) {
-        activeIndex = index;
-        document.querySelectorAll('.tl-item').forEach((el, i) => {
-            el.classList.toggle('active', i === index);
-        });
-    }
+    const photoState = {};
 
-    /* 统计途经地点数（去重） */
-    function countPlaces() {
-        const set = new Set();
-        ITINERARY.forEach(d => {
-            d.from.forEach(c => set.add(c));
-            d.to.forEach(c => set.add(c));
-        });
-        return set.size;
+    function switchPhoto(dayIdx, dir) {
+        const day = ITINERARY[dayIdx];
+        if (!day.photos || day.photos.length <= 1) return;
+        if (photoState[dayIdx] === undefined) photoState[dayIdx] = 0;
+        photoState[dayIdx] = (photoState[dayIdx] + dir + day.photos.length) % day.photos.length;
+
+        const img = document.getElementById(`img-${dayIdx}`);
+        img.style.opacity = '0';
+        setTimeout(() => {
+            img.src = day.photos[photoState[dayIdx]];
+            img.style.opacity = '1';
+        }, 150);
+
+        const ind = document.getElementById(`ind-${dayIdx}`);
+        if (ind) {
+            ind.querySelectorAll('span').forEach((s, i) => {
+                s.classList.toggle('active', i === photoState[dayIdx]);
+            });
+        }
     }
 
     /* ============================================================
-       航班动画（原逻辑保留）
+       航班动画
        ============================================================ */
     const CITY_POS = {
         shenzhen: { x: 0.78, y: 0.80 },
@@ -466,10 +690,7 @@
         const perpX = -dy / len;
         const perpY = dx / len;
         const offset = len * 0.25;
-        return {
-            x: midX + perpX * offset * curvatureX,
-            y: midY + perpY * offset * curvatureY
-        };
+        return { x: midX + perpX * offset * curvatureX, y: midY + perpY * offset * curvatureY };
     }
 
     function setCityPosition(el, pos) {
@@ -552,8 +773,17 @@
     /* ============================================================
        初始化
        ============================================================ */
+    function countPlaces() {
+        const set = new Set();
+        ITINERARY.forEach(d => {
+            [...d.from, ...d.to].forEach(c => set.add(c));
+        });
+        return set.size;
+    }
+
     window.addEventListener('load', () => {
-        renderTimeline();
+        renderXinjiangPlaces();
+        renderDays();
         document.getElementById('statCities').textContent = countPlaces();
         document.getElementById('year').textContent = new Date().getFullYear();
         updatePositions();
